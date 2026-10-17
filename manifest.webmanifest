@@ -1,0 +1,29 @@
+{
+  "name": "NoteBae — cute notes",
+  "short_name": "NoteBae",
+  "description": "Cute notes for brighter days. Soft, simple, low-friction note taking.",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#fcf0f6",
+  "theme_color": "#fbe3ee",
+  "categories": ["productivity", "lifestyle"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ],
+  "shortcuts": [
+    { "name": "New note", "short_name": "Note", "url": "./?new=note", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "New to-do list", "short_name": "To-do", "url": "./?new=list", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "To Do", "short_name": "To Do", "url": "./#/todo", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] }
+  ],
+  "share_target": {
+    "action": "./",
+    "method": "GET",
+    "params": { "title": "title", "text": "text", "url": "url" }
+  }
+}

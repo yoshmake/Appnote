@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <title>NoteBae</title>
+  <meta name="description" content="Cute notes for brighter days — a soft, low-friction note-taking app.">
+  <meta name="theme-color" content="#fbe3ee">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="NoteBae">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="preload" href="fonts/patrickhand-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/fredoka-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <div class="app" id="app">
+    <aside class="sidebar" id="sidebar" aria-label="Navigation">
+      <div class="brand">
+        <span class="brand-bunny" data-doodle="bunny"></span>
+        <span class="brand-name">NoteBae</span>
+        <span class="brand-spark" data-doodle="sparkle"></span>
+      </div>
+      <nav class="nav" id="nav">
+        <button class="nav-item" data-view="home"><span data-icon="home"></span>Home</button>
+        <button class="nav-item" data-view="notes"><span data-icon="notes"></span>Notes</button>
+        <button class="nav-item" data-view="todo"><span data-icon="todo"></span>To Do</button>
+        <button class="nav-item" data-view="reminders"><span data-icon="bell"></span>Reminders<span class="badge" data-badge="reminders" hidden></span></button>
+        <button class="nav-item" data-view="starred"><span data-icon="star"></span>Starred</button>
+        <button class="nav-item" data-view="archive"><span data-icon="archive"></span>Archive</button>
+      </nav>
+      <div class="folders-head">
+        <span>Folders</span>
+        <button class="icon-btn sm" id="addFolder" aria-label="New folder"><span data-icon="plus"></span></button>
+      </div>
+      <ul class="folders" id="folderList"></ul>
+      <div class="sidebar-foot">
+        <button class="backup-btn" id="backupBtn"><span data-icon="download"></span>Backup &amp; restore</button>
+        <div class="sleepy">
+          <span class="sleepy-cat" data-doodle="sleepycat"></span>
+          <span class="sleepy-bubble" data-doodle="heart"></span>
+        </div>
+      </div>
+    </aside>
+    <div class="scrim" id="scrim" hidden></div>
+
+    <main class="main" id="main">
+      <header class="topbar">
+        <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu"><span data-icon="menu"></span></button>
+        <div class="logo" aria-hidden="true"><span>NoteBae</span><span class="logo-bunny" data-doodle="bunny"></span></div>
+        <span class="topbar-spacer"></span>
+      </header>
+
+      <div class="view-head">
+        <div class="view-title-wrap">
+          <h1 class="view-title" id="viewTitle">My Notes</h1>
+          <span class="view-sub" id="viewSub"></span>
+        </div>
+        <label class="search">
+          <span data-icon="search"></span>
+          <input id="search" type="search" placeholder="Search…" autocomplete="off" enterkeyhint="search" aria-label="Search notes">
+          <button class="icon-btn sm search-clear" id="searchClear" aria-label="Clear search" hidden><span data-icon="close"></span></button>
+        </label>
+      </div>
+
+      <div class="chips" id="chips" role="list"></div>
+      <section class="content" id="content" aria-live="polite"></section>
+    </main>
+
+    <nav class="bottom-nav" id="bottomNav" aria-label="Quick navigation">
+      <button class="bn-item" data-view="home"><span data-icon="home"></span><small>Home</small></button>
+      <button class="bn-item" data-view="notes"><span data-icon="notes"></span><small>Notes</small></button>
+      <span class="bn-gap" aria-hidden="true"></span>
+      <button class="bn-item" data-view="todo"><span data-icon="todo"></span><small>To Do</small></button>
+      <button class="bn-item" data-view="reminders"><span data-icon="bell"></span><small>Reminders</small><span class="badge" data-badge="reminders" hidden></span></button>
+    </nav>
+    <button class="fab" id="fab" aria-label="New note"><span data-icon="plus"></span></button>
+  </div>
+
+  <section class="editor" id="editor" hidden aria-label="Note editor">
+    <div class="ed-backdrop" data-ed="close"></div>
+    <div class="ed-paper" id="edPaper">
+      <header class="ed-top">
+        <button class="icon-btn" data-ed="close" aria-label="Back"><span data-icon="back"></span></button>
+        <button class="folder-pill" data-ed="folder" id="edFolder"></button>
+        <span class="saved" id="edSaved" aria-live="polite"></span>
+        <button class="icon-btn" data-ed="pin" id="edPin" aria-label="Pin" aria-pressed="false"><span data-icon="pin"></span></button>
+        <button class="icon-btn" data-ed="star" id="edStar" aria-label="Star" aria-pressed="false"><span data-icon="star"></span></button>
+        <button class="icon-btn" data-ed="more" aria-label="More options"><span data-icon="more"></span></button>
+      </header>
+      <div class="ed-scroll" id="edScroll">
+        <input class="ed-title" id="edTitle" placeholder="Title" aria-label="Title" enterkeyhint="next" autocomplete="off">
+        <div class="ed-reminder" id="edReminder"></div>
+        <textarea class="ed-body" id="edBody" placeholder="Write anything… ♡" aria-label="Note text"></textarea>
+        <div class="ed-check" id="edCheck"></div>
+        <div class="ed-images" id="edImages"></div>
+        <p class="ed-cheer" id="edCheer"></p>
+        <span class="ed-doodle" id="edDoodle"></span>
+      </div>
+      <footer class="ed-tools">
+        <button class="tool" data-ed="bullet" aria-label="Bullet point"><span data-icon="bullet"></span></button>
+        <button class="tool" data-ed="check" aria-label="Add checklist item"><span data-icon="todo"></span></button>
+        <button class="tool" data-ed="image" aria-label="Add image"><span data-icon="image"></span></button>
+        <button class="tool" data-ed="remind" aria-label="Reminder"><span data-icon="bell"></span></button>
+        <button class="tool" data-ed="theme" aria-label="Colour and style"><span data-icon="palette"></span></button>
+      </footer>
+    </div>
+  </section>
+
+  <div class="sheet" id="sheet" hidden></div>
+  <div class="lightbox" id="lightbox" hidden></div>
+  <div class="toasts" id="toasts"></div>
+  <input type="file" id="imagePick" accept="image/*" multiple hidden>
+  <input type="file" id="importPick" accept="application/json,.json" hidden>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
